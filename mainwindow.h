@@ -25,6 +25,8 @@ public:
     double b_2 = startPoint;
     double b_3 = startPoint;
 
+    bool check_stability();
+
 private slots:
 
     void on_update_model_stanowy_pressed();
