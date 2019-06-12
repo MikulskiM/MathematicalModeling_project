@@ -3,6 +3,7 @@
 //#include <QTextStream>
 //#include <qlineedit.h>
 //#include <string.h>
+#include <qvalidator.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,11 +13,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-//    QDoubleValidator *validator = new QDoubleValidator();
-//    validator->setLocale(QLocale::English);
+    QDoubleValidator *validator = new QDoubleValidator();
+    validator->setLocale(QLocale::English);
 
-//    ui->a0_box->setValidator(validator);
-//    ui->a1_edit_box->setValidator(validator);
+    ui->a0_box->setValidator(validator);
+    ui->a1_edit_box->setValidator(validator);
+    ui->a2_edit_box->setValidator(validator);
+    ui->b0_edit_box->setValidator(validator);
+    ui->b1_edit_box->setValidator(validator);
+    ui->b2_edit_box->setValidator(validator);
+    ui->b3_edit_box->setValidator(validator);
 
 
 
