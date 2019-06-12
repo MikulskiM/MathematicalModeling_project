@@ -12,11 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-
+    // ------------------------------------------------------ tworzę validator który nie pozwoli wpisać do naszych okienek nic poza cyframi i , i .
     QDoubleValidator *validator = new QDoubleValidator();
     validator->setLocale(QLocale::English);
 
-    ui->a0_box->setValidator(validator);
+    ui->a0_box->setValidator(validator);        // ustawiam validator dla każdego okienka
     ui->a1_edit_box->setValidator(validator);
     ui->a2_edit_box->setValidator(validator);
     ui->b0_edit_box->setValidator(validator);
