@@ -3,7 +3,7 @@
 # Project created by QtCreator 2019-04-19T16:13:07
 #
 #-------------------------------------------------
-
+QT += charts
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -25,11 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        chart.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        math.cpp
 
 HEADERS += \
-        mainwindow.h
+        chart.h \
+        mainwindow.h \
+        math.h
 
 FORMS += \
         mainwindow.ui

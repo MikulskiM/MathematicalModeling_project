@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "math.h"
 #include "ui_mainwindow.h"
 //#include <QTextStream>
 //#include <qlineedit.h>
@@ -25,13 +26,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->b3_edit_box->setValidator(validator);
 
 
-
+    chart = new Chart(WEJSCIE);
+    ui->graphicsView->setChart(chart);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::prepareButtons()
+{
+    ui->pushButton->setCheckable(true);
+    ui->pushButton_2->setCheckable(true);
+    ui->pushButton_3->setCheckable(true);
+    signalsButton.addButton(ui->pushButton);
+    signalsButton.addButton(ui->pushButton_2);
+    signalsButton.addButton(ui->pushButton_3);
+
+    signalsButton.setExclusive(true);
+
+    ui->pushButton->setChecked(true);
+
 }
 
 bool MainWindow::check_stability(){ //  ------- funkcja sprawdzająca stabilność naszego układu
@@ -104,4 +121,59 @@ void MainWindow::on_update_model_stanowy_pressed()
 
 }
 
+void MainWindow::on_pushButton_clicked()
+{
+    math.typ_wejscia = 'p';               //INPUT PROSTOKĄTNA
+    QLineSeries *dane =new QLineSeries();
+    math.wypelnianie_macierzy();
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
+    for (int i=0; i<math.numberOfPoints; i++)
+    {
+        double j=i*math.step;
+        dane->append(j, math.wybor(j,'p'));
+    }
 
+    chart->setData(WEJSCIE,dane);
+    chart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
+}
+
+void MainWindow::on_pushButton_2_clicked()      //INPUT SKOK
+{
+    math.typ_wejscia = 'h';
+    QLineSeries *dane =new QLineSeries();
+    math.wypelnianie_macierzy();
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
+    for (int i=0; i<math.numberOfPoints; i++)
+    {
+       // double j=i/max_time;
+        double j=i*math.step;
+        dane->append(j, math.wybor(j,'h'));
+    }
+    chart->setData(WEJSCIE,dane);
+    chart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    math.typ_wejscia = 's';           //INPUT SINUS
+    QLineSeries *dane =new QLineSeries();
+    math.wypelnianie_macierzy();
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
+    for (int i=0; i<math.numberOfPoints; i++)
+    {
+        double j=i*math.step;
+        dane->append(j, math.wybor(j,'s'));
+    }
+
+    chart->setData(WEJSCIE,dane);
+    chart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
+
+
+}
