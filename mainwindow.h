@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QButtonGroup>
+#include <string>
+#include <QString>
+#include <QDebug>
+#include "chart.h"
+#include "math.h"
+
 
 #define startPoint 10
 
@@ -24,15 +31,30 @@ public:
     double b_1 = startPoint;
     double b_2 = startPoint;
     double b_3 = startPoint;
+    int Tinput = 10;
+    double max_time = 100;
+    double maksimumY=2;
 
     bool check_stability();
+
+    void prepareButtons();
 
 private slots:
 
     void on_update_model_stanowy_pressed();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QButtonGroup signalsButton;
+    Math math;
+    Chart *chart;
+
 };
 
 #endif // MAINWINDOW_H
