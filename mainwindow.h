@@ -35,6 +35,9 @@ public:
     double max_time = 100;
     double maksimumY=2;
 
+    double minimum = 0;
+    double maksimum = 0;
+
     bool check_stability();
 
     void prepareButtons();
@@ -49,11 +52,14 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
     Math math;
     Chart *chart;
+    Chart *chartW;
 
 };
 

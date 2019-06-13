@@ -16,6 +16,13 @@ Chart::Chart(type_of_chart typ_wykresu)
         ustawPrzedzialyWykresu(WEJSCIE, -1,100,-3,3);
         break;
 
+    case WYJSCIE:
+
+        linLinAxis();
+        this->setTitle("Sygnał wyjściowy");
+        ustawPrzedzialyWykresu(WYJSCIE, -1,100,-0.5,100);
+        break;
+
     }
 
 }
@@ -26,7 +33,7 @@ void Chart::setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane)
     daneNaWykresie = danePrzekazane;
     this->addSeries(daneNaWykresie);
 
-    if(typ_wykresu == WEJSCIE){
+    if(typ_wykresu == WEJSCIE || typ_wykresu == WYJSCIE){
 
        daneNaWykresie->attachAxis(axisX);
        daneNaWykresie->attachAxis(axisY);
@@ -39,7 +46,7 @@ void Chart::setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane)
 
 void Chart::ustawPrzedzialyWykresu(type_of_chart typ_wykresu, double bottomX, double topX, double bottomY, double topY)
 {
-    if(typ_wykresu == WEJSCIE){
+    if(typ_wykresu == WEJSCIE || typ_wykresu == WYJSCIE){
         axisX->setRange(bottomX,topX);
         axisY->setRange(bottomY,topY);
 

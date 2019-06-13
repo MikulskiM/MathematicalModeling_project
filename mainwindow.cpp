@@ -177,3 +177,30 @@ void MainWindow::on_pushButton_3_clicked()
 
 
 }
+void MainWindow::on_pushButton_4_clicked()
+{
+
+    math.wypelnianie_macierzy();         //OUTPUT
+    math.TransformataOdwrotna();
+
+   // qDebug()<<"maksy = "<<maksimumY;
+
+    chartW = new Chart(WYJSCIE);
+    QLineSeries *nowe =new QLineSeries();
+    double xfirst = -1*max_time/100;
+    nowe->append(xfirst, 0);
+    for (int i=0; i< math.numberOfPoints; i++)       // to samo dla numberOfPoints i max_time...  DOŚĆ ZASTANAWIAJĄCE
+    {
+        double j= i*math.step;
+        nowe->append(j, math.outputData[i]);
+
+    }
+    maksimum = math.checkMaksimum()*1.1;
+    minimum = math.checkMinimum()*1.1;
+
+    chartW->setData(WYJSCIE,nowe);
+    chartW->ustawPrzedzialyWykresu( WYJSCIE, xfirst, max_time,minimum, maksimum );
+    ui->graphicsView_2->setChart(chartW);
+    //qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
+
+}

@@ -46,6 +46,10 @@ public:
 
     void wypelnianie_macierzy();
 
+    double checkMaksimum();
+    double checkMinimum();
+
+    void TransformataOdwrotna();
     void MatrixMultiplication (double Matrix1[3][3], double Matrix2[3][3], double outMatrix[3][3]);
     void MatrixAdd(double Matrix1[3][3], double Matrix2[3][3], double outMatrix[3][3]);
     void MatrixTransposition (double inMatrix1[3][3], double outMatrix[3][3]);
@@ -58,6 +62,7 @@ public:
     double wyliczanie_wyjscia (double t);
 
     char typ_wejscia;
+    double outputData[numberOfPoints];
 
     QtCharts::QLineSeries *obliczaneDane;
 };

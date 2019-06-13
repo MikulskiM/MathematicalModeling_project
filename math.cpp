@@ -148,7 +148,41 @@ void Math::MatrixInverse (double (*inMatrix)[3],  double (*outMatrix)[3])
     outMatrix[2][2]=1/det*Wyznacznik(inMatrix[0][0],inMatrix[0][1],inMatrix[1][0],inMatrix[1][1]);
 }
 
-/* double Math::wyliczanie_wyjscia (double t)
+void Math::TransformataOdwrotna()
+{
+    for(int i=0; i<numberOfPoints; i++){
+        double t= i*step;
+        outputData[i]=wyliczanie_wyjscia(t);
+    }
+}
+
+double Math::checkMaksimum()
+{
+    double maksimumY=0;
+    for (int i=0; i<numberOfPoints; i++)
+    {
+        if(outputData[i]>maksimumY)
+        {
+            maksimumY=outputData[i];
+        }
+    }
+    return maksimumY;
+}
+
+double Math::checkMinimum()
+{
+    double minimum=0;
+    for (int i=0; i<numberOfPoints; i++)
+    {
+        if(outputData[i]<minimum)
+        {
+            minimum=outputData[i];
+        }
+    }
+    return minimum;
+}
+
+ double Math::wyliczanie_wyjscia (double t)
 {
     double wyjscie;
     wypelnijMacierzDX(t);
@@ -161,7 +195,7 @@ void Math::MatrixInverse (double (*inMatrix)[3],  double (*outMatrix)[3])
 void Math::wypelnijMacierzDX(double t)
 {
     MatrixMultiplication(MatrixA, MatrixX, TemporaryMatrix0);
-    MatrixConstMult(MatrixB, rectangle1(t, typ_wejscia), TemporaryMatrix1);
+    MatrixConstMult(MatrixB, wybor(t, typ_wejscia), TemporaryMatrix1);
     MatrixAdd(TemporaryMatrix0, TemporaryMatrix1, dxMatrix);
 }
 
@@ -171,4 +205,4 @@ void Math::calkowanie()
     MatrixConstMult(dxMatrix, 0.01, TemporaryMatrix0);
     MatrixAdd(TemporaryMatrix0, MatrixX, MatrixX);
 }
-*/
+
