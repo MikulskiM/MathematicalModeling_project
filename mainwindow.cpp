@@ -189,7 +189,7 @@ void MainWindow::on_pushButton_4_clicked()
     QLineSeries *nowe =new QLineSeries();
     double xfirst = -1*max_time/100;
     nowe->append(xfirst, 0);
-    for (int i=0; i< math.numberOfPoints; i++)       // to samo dla numberOfPoints i max_time...  DOŚĆ ZASTANAWIAJĄCE
+    for (int i=0; i< math.numberOfPoints; i++)       // to samo dla numberOfPoints i max_time...
     {
         double j= i*math.step;
         nowe->append(j, math.outputData[i]);
@@ -202,5 +202,24 @@ void MainWindow::on_pushButton_4_clicked()
     chartW->ustawPrzedzialyWykresu( WYJSCIE, xfirst, max_time,minimum, maksimum );
     ui->graphicsView_2->setChart(chartW);
     //qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
+
+}
+
+void MainWindow::on_pushButton_charakterystyka_amplitudowa_clicked()
+{
+    chartW = new Chart(AMPLITUDOWY);
+    QLineSeries *nowe = new QLineSeries();
+
+
+    math.charakterystyka_amplitudowa();
+    nowe = math.obliczaneDane;
+
+    chartW->setData(AMPLITUDOWY,nowe);
+    chartW->ustawPrzedzialyWykresu(AMPLITUDOWY,0.1,10000,math.minimumRange*2,math.maksimumRange*2); // ----------- TU UWAGA, pomnożyłem razy 2 bo ładniej wygląda
+
+    int range = int(((abs(math.maksimumRange)+abs(math.minimumRange)))/20);
+    chartW->axisY->setTickCount(range+1);
+
+    ui->graphicsView_2->setChart(chartW);
 
 }

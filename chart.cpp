@@ -23,6 +23,16 @@ Chart::Chart(type_of_chart typ_wykresu)
         ustawPrzedzialyWykresu(WYJSCIE, -1,100,-0.5,100);
         break;
 
+
+    case AMPLITUDOWY:
+
+        loglinAxis();
+        this->setTitle("Charakterystyka Amplitudowa");
+        axisY->setTitleText("Amplitude [dB]");
+        laxisX->setTitleText("Frequency [rad/s]");
+        ustawPrzedzialyWykresu(AMPLITUDOWY, 0.001,200,-10,100);
+
+        break;
     }
 
 }

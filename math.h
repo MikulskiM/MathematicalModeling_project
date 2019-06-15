@@ -1,5 +1,6 @@
 #ifndef MATH_H
 #define MATH_H
+#define AMPLITUDE 20
 
 #include <cmath>
 #include <QtCharts>
@@ -23,6 +24,8 @@ public:
     double SkokInput (double i);
     double SinusInput (double i);
 
+    std::complex<double> transmitationFun(double omega); // ------- funkcja używana do obliczania charakterystyki amplitudowej
+
     double MatrixX[3][3];       //[3][1]
     double MatrixA[3][3];
     double MatrixB[3][3];       //[3][1]
@@ -39,8 +42,13 @@ public:
     double b_2=2;
     double b_3=2;
 
+    double T = 0; // -------------------------------- zostawiam opóźnienie, bo boję sie, bo mam wzory
+
     double TemporaryMatrix0[3][3];
     double TemporaryMatrix1[3][3];
+
+    double minimumRange = 1000;
+    double maksimumRange = -1000;
 
     double wybor (double t, char wybor_wejscia );
 
@@ -48,6 +56,7 @@ public:
 
     double checkMaksimum();
     double checkMinimum();
+    void max_min_charakterystyki(int type, double value);
 
     void TransformataOdwrotna();
     void MatrixMultiplication (double Matrix1[3][3], double Matrix2[3][3], double outMatrix[3][3]);
@@ -60,6 +69,7 @@ public:
 
     void calkowanie ();
     double wyliczanie_wyjscia (double t);
+    void charakterystyka_amplitudowa();
 
     char typ_wejscia;
     double outputData[numberOfPoints];

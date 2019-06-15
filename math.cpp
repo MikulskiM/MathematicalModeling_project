@@ -206,3 +206,67 @@ void Math::calkowanie()
     MatrixAdd(TemporaryMatrix0, MatrixX, MatrixX);
 }
 
+std::complex<double> Math::transmitationFun(double omega) // -------------- funkcja zerżnieta od dziewczyn, używamy jej w charakterystyce amplitudowej
+{
+    std::complex<double> licznik;
+    std::complex<double> mianownik;
+    std::complex<double> j(0,1);
+    std::complex<double> jeden(1,0);
+    std::complex<double> expo(e,0);
+    licznik = b_3*j*j*j*omega*omega*omega + b_2*j*j*omega*omega + b_1*j*omega + b_0;  // ------ nasza transmitancja (nie zbyt prosta)
+    mianownik = j*j*j*omega*omega*omega + a_2*j*j*omega*omega + a_1*j*omega + a_0;
+
+//    licznik = b_1*j*omega + b_0;                    // -------- najprostrzy przykład transmitancji
+//    mianownik = j*j*omega*omega + a_1*j*omega+a_0;
+
+    std::complex<double> G;
+    G = (licznik/mianownik);
+
+   return G/(jeden-G);
+
+}
+
+void Math::charakterystyka_amplitudowa()    // ------------------ funkcja licząca charakterystykę aplitudową
+{
+    maksimumRange = -10000;
+    minimumRange = 10000;
+    obliczaneDane = new QLineSeries();
+       std::complex<double> yValue;
+       double amplitude;
+       for(double omega = 0.1; omega < 10000 ; omega += 0.1){
+
+               yValue = transmitationFun(omega);
+               amplitude = 20*log(abs(yValue));
+               obliczaneDane->append(omega,amplitude);
+               max_min_charakterystyki(AMPLITUDE, amplitude);
+
+       }
+}
+
+void Math::max_min_charakterystyki(int type, double value) // ---------------- ta fukncja sprawdza jakie są min i max charakterystyk
+{                                                       //                  wtedy można lepiej dopasować skalę
+    if(value < minimumRange){
+        minimumRange = value;
+    }
+    if(value > maksimumRange){
+        maksimumRange = value;
+        maksimumRange = (floor((maksimumRange/type))+1)*type;
+
+        if(maksimumRange<=0){
+            switch(type){
+            case AMPLITUDE:
+                maksimumRange = 20;
+                break;
+         /*   case PHASE:
+                maksimumRange = 45; // ------------- póki co nie robimy jeszcze charakerystyki fazowej
+                break;                  */
+            }
+        }
+    }
+
+    if (minimumRange<0)
+        minimumRange = (floor((minimumRange/type)))*type;
+    else
+        minimumRange = (floor((minimumRange/type))+1)*type;
+
+}

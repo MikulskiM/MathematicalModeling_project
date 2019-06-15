@@ -11,7 +11,7 @@
 
 
 
-enum type_of_chart {WEJSCIE, WYJSCIE};
+enum type_of_chart {WEJSCIE, WYJSCIE, AMPLITUDOWY};
 enum input_signal {SQUARE, HEAVYSIDE, SINUS};
 
 class Chart : public QChart

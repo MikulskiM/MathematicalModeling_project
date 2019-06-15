@@ -54,6 +54,8 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_pushButton_charakterystyka_amplitudowa_clicked();
+
 private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
